@@ -29,6 +29,10 @@ public class FileListItem implements Comparable<FileListItem> {
     public boolean isDirectory() {
         return directory;
     }
+	
+	public boolean isApk() {
+		return filename.endsWith(".apk");
+	}
 
     public void setDirectory(boolean directory) {
         this.directory = directory;

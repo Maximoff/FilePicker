@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import com.developer.filepicker.utils.ApkIcon;
 
 /**
  * @author akshay sunil masram
@@ -90,6 +91,11 @@ public class FileListAdapter extends BaseAdapter{
         }
         else {
             holder.type_icon.setImageResource(R.mipmap.ic_type_file);
+			if (item.isApk())
+			{
+				holder.type_icon.setTag(item.getFilename());
+				new ApkIcon(context, holder.type_icon).execute(item.getLocation());
+			}
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 holder.type_icon.setColorFilter(context.getResources().getColor(R.color.colorAccent,context.getTheme()));
             }
