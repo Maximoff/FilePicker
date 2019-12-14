@@ -1,7 +1,6 @@
 package com.developer.filepicker.utils;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -27,11 +26,12 @@ public class ApkIcon extends AsyncTask<String, Integer, Drawable>
 		try
 		{
 			PackageManager pm = context.getPackageManager();
-			PackageInfo packageInfo = pm.getPackageArchiveInfo(parameter[0], PackageManager.GET_ACTIVITIES);
+			PackageInfo packageInfo = pm.getPackageArchiveInfo(parameter[0], 0);
 			if (packageInfo != null)
 			{
-				ApplicationInfo appInfo = packageInfo.applicationInfo;
-				return appInfo.loadIcon(pm);
+				packageInfo.applicationInfo.sourceDir = parameter[0];
+				packageInfo.applicationInfo.publicSourceDir = parameter[0];
+				return packageInfo.applicationInfo.loadIcon(pm);
 			}
 			else
 			{
